@@ -1,4 +1,5 @@
-grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
+//2.5 is required for tomcat6
+grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
@@ -57,6 +58,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
+        //provided ":grails-plugin-async:2.3.7"
         // plugins for the build system only
         build ":tomcat:7.0.52.1"
 
