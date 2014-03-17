@@ -39,7 +39,7 @@ individual record pages of the sandbox will indicate whether or not sensitivity 
                 <td>The xml file that supplies all the sensitive species and the categories and zones to which they belong.</td>
                 <td>This file was last generated on ${updateDate}.</td>
                 <td><g:if test="${request.isUserInRole('ROLE_ADMIN')}" >
-                    Force a manual <a href="${request.contextPath}/refresh">refresh
+                    <a  class="btn" href="${request.contextPath}/refresh">Refresh</a>
                     </g:if>
                 </td>
             </tr>
