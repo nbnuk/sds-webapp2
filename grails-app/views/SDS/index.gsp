@@ -22,17 +22,51 @@ The Sensitive Data Service can be tested through the <a href="http://sandbox.ala
 individual record pages of the sandbox will indicate whether or not sensitivity was detected.
 </p>
 <h2>Resources</h2>
-The Sensitive Data Service is controlled through a set of XML files.
-<ul>
-    <li> <a href="${request.contextPath}/sensitive-species-data.xml">sensitive-species-data.xml</a>
-        <p>Last generated from the <a href="http://lists.ala.org.au/public/speciesLists?isSDS=eq:true">SDS lists</a> on ${updateDate}</p>
-        <g:if test="${request.isUserInRole('ROLE_ADMIN')}" >
-            <p>Force a manual <a href="${request.contextPath}/refresh">refresh</a></p>
-        </g:if>
-    </li>
-    <li> <a href="${request.contextPath}/sensitivity-categories.xml">sensitivity-categories.xml</a></li>
-    <li> <a href="${request.contextPath}/sensitivity-zones.xml">sensitivity-zones.xml</a></li>
-</ul>
+<p>The Sensitive Data Service is controlled through a set of XML files.</p>
+
+    <table class="table">
+        <thead>
+         <tr>
+             <td>File</td>
+             <td>Purpose</td>
+             <td/>
+             <td/>
+         </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="${request.contextPath}/sensitive-species-data.xml">Sensitive Species Data</a></td>
+                <td>The xml file that supplies all the sensitive species and the categories and zones to which they belong.</td>
+                <td>This file was last generated on ${updateDate}.</td>
+                <td><g:if test="${request.isUserInRole('ROLE_ADMIN')}" >
+                    Force a manual <a href="${request.contextPath}/refresh">refresh
+                    </g:if>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="${request.contextPath}/sensitivity-categories.xml">Sensitive Categories</a></td>
+                <td>The xml file that supplies the vocabulary for the sensitive categories.</td>
+                <td>This is a static file.</td>
+                <td/>
+            </tr>
+            <tr>
+                <td><a href="${request.contextPath}/sensitivity-zones.xml">Sensitive Zones</a></td>
+                <td>The xml file that supplies the vocabulary for the sensitive zones.</td>
+                <td>This is a static file.</td>
+                <td/>
+            </tr>
+        </tbody>
+    </table>
+%{--<ul>--}%
+    %{--<li> <a href="${request.contextPath}/sensitive-species-data.xml">sensitive-species-data.xml</a>--}%
+        %{--<p>Last generated from the <a href="http://lists.ala.org.au/public/speciesLists?isSDS=eq:true">SDS lists</a> on ${updateDate}</p>--}%
+        %{--<g:if test="${request.isUserInRole('ROLE_ADMIN')}" >--}%
+            %{--<p>Force a manual <a href="${request.contextPath}/refresh">refresh</a></p>--}%
+        %{--</g:if>--}%
+    %{--</li>--}%
+    %{--<li> <a href="${request.contextPath}/sensitivity-categories.xml">sensitivity-categories.xml</a></li>--}%
+    %{--<li> <a href="${request.contextPath}/sensitivity-zones.xml">sensitivity-zones.xml</a></li>--}%
+%{--</ul>--}%
 
 The species that make up the individual components of the SDS can be view via the <a href="http://lists.ala.org.au/public/speciesLists?isSDS=eq:true">list tool</a>.
 

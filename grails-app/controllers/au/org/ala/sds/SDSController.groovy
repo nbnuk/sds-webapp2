@@ -29,7 +29,6 @@ class SDSController {
      */
     def index() {
         //return the date last generated for the service.
-        System.out.println("Starting to show the index")
         render(model: [updateDate:SDSService.getLastUpdated()], view:'index')
     }
     /*
@@ -38,7 +37,7 @@ class SDSController {
     def getFile={
         if (params.file){
             //we have a value for the file
-            System.out.println("Returning " + params.file)
+            log.debug("Returning " + params.file)
             //set the required response header
             response.setHeader("Cache-Control", "must-revalidate")
 
