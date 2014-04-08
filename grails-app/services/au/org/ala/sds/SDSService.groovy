@@ -47,20 +47,26 @@ class SDSService {
 
     private SensitiveSpeciesFinder finder;
     private ALANameSearcher searcher;
+    private boolean firstLoad = true;
     def grailsApplication
 
     public SDSService(){
         //sensitiveFileName = grailsApplication.config.sds.file?:sensitiveFileName
-        File file = new File(sensitiveFileName)
-        searcher = new ALANameSearcher(Configuration.getInstance().getNameMatchingIndex())
-        if(file.exists()){
-            lastUpdated = new Date(file.lastModified())
-            log.info("Sensitive Species List last generated " +lastUpdated)
-            System.out.println("Sensitive Species List last generated " + lastUpdated + " " + file.toURI().toString())
-            finder = SensitiveSpeciesFinderFactory.getSensitiveSpeciesFinder(file.toURI().toString(), searcher)
-        }  else{
-            forceReload()
-        }
+        new Thread(){
+            public void run(){
+                File file = new File(sensitiveFileName)
+                searcher = new ALANameSearcher(Configuration.getInstance().getNameMatchingIndex())
+                if(file.exists()){
+                    lastUpdated = new Date(file.lastModified())
+                    log.info("Sensitive Species List last generated " +lastUpdated)
+                    finder = SensitiveSpeciesFinderFactory.getSensitiveSpeciesFinder(file.toURI().toString(), searcher)
+                    log.info("Finished loading the finder ")
+                }  else{
+                    forceReload()
+                }
+                firstLoad=false;
+            }
+            }.start()
     }
     /**
      *
@@ -103,10 +109,10 @@ class SDSService {
                     lastUpdated = new Date()
                     initFinder()
                 } else{
-                    log.info("List is already up to date.");
+                    log.info("List is already up to date.")
                 }
             } catch(FileNotFoundException e){
-                log.error("Unable to update the SDS species file." , e);
+                log.error("Unable to update the SDS species file." , e)
             } catch(IOException e){
                 log.error(e);
             } catch (Exception e){
@@ -124,16 +130,21 @@ class SDSService {
         try{
             SensitiveSpeciesFinder tmpfinder = SensitiveSpeciesFinderFactory.getSensitiveSpeciesFinder("file:///data/sds/sensitive-species.xml", searcher, true);
             synchronized (finder){
-                finder = tmpfinder;
+                finder = tmpfinder
             }
         }
         catch (Exception e){
-            log.error("Unable to recreate the SDS finder with new list.",e);
+            log.error("Unable to recreate the SDS finder with new list.",e)
         }
     }
 
 
     public SpeciesReport lookupSpecies(String name, String latitude, String longitude, String date) {
+        if(firstLoad && finder == null){
+            SpeciesReport sr = new SpeciesReport();
+            sr.status="The SDS finder has not been initialised, please try again in 5 minutes. Let us know if you continue to see this error message";
+            return sr;
+        }
         def status=[]
         def results=[:]
         SensitiveTaxon st = finder.findSensitiveSpecies(name)
