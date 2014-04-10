@@ -163,9 +163,7 @@ log4j = {
                 rollingFile name: "stacktrace",
                         maxFileSize: 1024,
                         file: "/var/log/tomcat7/sdswebapp2-stacktrace.log"
-            }
-        }
-        environments {
+            }        
             development {
                 rollingFile name: "sds-prod",
                         maxFileSize: 104857600,
