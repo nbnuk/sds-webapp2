@@ -129,7 +129,7 @@ class SDSService {
     private void initFinder(){
         try{
             SensitiveSpeciesFinder tmpfinder = SensitiveSpeciesFinderFactory.getSensitiveSpeciesFinder("file:///data/sds/sensitive-species.xml", searcher, true);
-            synchronized (finder){
+            synchronized (lock){
                 finder = tmpfinder
             }
         }

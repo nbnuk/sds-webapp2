@@ -151,13 +151,43 @@ environments {
 
 // log4j configuration
 log4j = {
+
+    appenders {
+        environments {
+            production {
+                rollingFile name: "sds-prod",
+                        maxFileSize: 104857600,
+                        file: "/var/log/tomcat7/sdswebapp2.log",
+                        threshold: org.apache.log4j.Level.DEBUG,
+                        layout: pattern(conversionPattern: "%-5p: %d [%c{1}] %m%n")
+                rollingFile name: "stacktrace",
+                        maxFileSize: 1024,
+                        file: "/var/log/tomcat7/sdswebapp2-stacktrace.log"
+            }
+        }
+        environments {
+            development {
+                rollingFile name: "sds-prod",
+                        maxFileSize: 104857600,
+                        file: "/var/log/tomcat7/sdswebapp2.log",
+                        threshold: org.apache.log4j.Level.DEBUG,
+                        layout: pattern(conversionPattern: "%-5p: %d [%c{1}] %m%n")
+                rollingFile name: "stacktrace",
+                        maxFileSize: 1024,
+                        file: "/var/log/tomcat7/sdswebapp2-stacktrace.log"
+            }
+        }
+    }
+        root {
+            debug 'sds-prod'
+        }
     // Example of changing the log pattern for the default console appender:
     //
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
+    info  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
@@ -169,5 +199,5 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 
-    error 'au.org.ala'
+    debug 'au.org.ala'
 }
