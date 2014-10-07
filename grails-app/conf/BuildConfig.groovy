@@ -73,9 +73,8 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.3.8"
         runtime ":jquery:1.11.0.2"
         runtime ":resources:1.2.7"
-        runtime(":ala-web-theme:0.2-SNAPSHOT"){
-            excludes "servlet-api"
-        }
+        runtime ":ala-web-theme:0.8.1"
+        
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"
