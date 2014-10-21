@@ -52,8 +52,9 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
-        compile("au.org.ala:sds:1.2-SNAPSHOT") {
+        compile("au.org.ala:sds:1.2") {
             excludes "spring-jdbc"
+	        excludes "servlet-api"
         }
     }
 
@@ -65,7 +66,7 @@ grails.project.dependency.resolution = {
 
         // plugins for the compile step
         compile ":scaffolding:2.0.2"
-        compile ':cache:1.1.1'
+       // compile ':cache:1.1.8'
         compile ":quartz:1.0.1"
 
 
@@ -73,7 +74,9 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.3.8"
         runtime ":jquery:1.11.0.2"
         runtime ":resources:1.2.7"
-        runtime ":ala-web-theme:0.8.1"
+        runtime (":ala-web-theme:0.8.1") {
+            excludes "servlet-api"
+        }
         
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
