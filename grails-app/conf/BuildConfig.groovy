@@ -52,7 +52,7 @@ grails.project.dependency.resolution = {
 
         // plugins needed at runtime but not for compilation
         runtime ":database-migration:1.3.8"
-        runtime ":ala-bootstrap2:2.1-SNAPSHOT"
+        runtime ":ala-bootstrap2:2.1"
         runtime ":resources:1.2.14"
         if (Environment.current == Environment.PRODUCTION) {
             runtime ":zipped-resources:1.0.1"
