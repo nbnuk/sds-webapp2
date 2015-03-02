@@ -1,3 +1,5 @@
+import org.apache.log4j.Level
+
 /******************************************************************************\
  *  CONFIG MANAGEMENT
  \******************************************************************************/
@@ -149,53 +151,39 @@ environments {
     }
 }
 
+def loggingDir = (System.getProperty('catalina.base') ? System.getProperty('catalina.base') + '/logs' : './logs')
 // log4j configuration
 log4j = {
-
+// Example of changing the log pattern for the default console
+// appender:
     appenders {
         environments {
             production {
-                rollingFile name: "sds-prod",
-                        maxFileSize: 104857600,
-                        file: "/var/log/tomcat7/sdswebapp2.log",
-                        threshold: org.apache.log4j.Level.DEBUG,
-                        layout: pattern(conversionPattern: "%-5p: %d [%c{1}] %m%n")
-                rollingFile name: "stacktrace",
-                        maxFileSize: 1024,
-                        file: "/var/log/tomcat7/sdswebapp2-stacktrace.log"
-            }        
+                rollingFile name: "tomcatLog", maxFileSize: '1MB', file: "${loggingDir}/${appName}.log", threshold: Level.ERROR, layout: pattern(conversionPattern: "%d %-5p [%c{1}] %m%n")
+            }
             development {
-                rollingFile name: "sds-prod",
-                        maxFileSize: 104857600,
-                        file: "/var/log/tomcat7/sdswebapp2.log",
-                        threshold: org.apache.log4j.Level.DEBUG,
-                        layout: pattern(conversionPattern: "%-5p: %d [%c{1}] %m%n")
-                rollingFile name: "stacktrace",
-                        maxFileSize: 1024,
-                        file: "/var/log/tomcat7/sdswebapp2-stacktrace.log"
+                console name: "stdout", layout: pattern(conversionPattern: "%d %-5p [%c{1}] %m%n"), threshold: Level.DEBUG
+            }
+            test {
+                rollingFile name: "stdout,tomcatLog", maxFileSize: '1MB', file: "/tmp/${appName}", threshold: Level.DEBUG, layout: pattern(conversionPattern: "%d %-5p [%c{1}] %m%n")
             }
         }
     }
-        root {
-            debug 'sds-prod'
-        }
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+    root {
+// change the root logger to my tomcatLog file
+        error 'tomcatLog'
+        warn 'tomcatLog'
+        additivity = true
+    }
 
-    info  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
+    warn 'au.org.ala.cas.client',
+            'grails.spring.BeanBuilder',
+            'grails.plugin.webxml',
+            'grails.plugin.cache.web.filter',
+            'grails.app.services.org.grails.plugin.resource',
+            'grails.app.taglib.org.grails.plugin.resource',
+            'grails.app.resourceMappers.org.grails.plugin.resource'
 
-    debug 'au.org.ala'
+    debug 'grails.app'
 }
+
