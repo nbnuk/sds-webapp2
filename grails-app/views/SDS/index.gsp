@@ -29,8 +29,8 @@ individual record pages of the sandbox will indicate whether or not sensitivity 
          <tr>
              <td>File</td>
              <td>Purpose</td>
-             <td/>
-             <td/>
+             <td></td>
+             <td></td>
          </tr>
         </thead>
         <tbody>
@@ -47,13 +47,13 @@ individual record pages of the sandbox will indicate whether or not sensitivity 
                 <td><a href="${request.contextPath}/sensitivity-categories.xml">Sensitive Categories</a></td>
                 <td>The xml file that supplies the vocabulary for the sensitive categories.</td>
                 <td>This is a static file.</td>
-                <td/>
+                <td></td>
             </tr>
             <tr>
                 <td><a href="${request.contextPath}/sensitivity-zones.xml">Sensitive Zones</a></td>
                 <td>The xml file that supplies the vocabulary for the sensitive zones.</td>
                 <td>This is a static file.</td>
-                <td/>
+                <td></td>
             </tr>
         </tbody>
     </table>
