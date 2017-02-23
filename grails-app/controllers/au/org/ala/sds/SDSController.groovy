@@ -14,7 +14,7 @@
  */
 package au.org.ala.sds
 
-
+import au.org.ala.sds.util.GeoLocationHelper
 import grails.converters.JSON
 
 /**
@@ -62,5 +62,12 @@ class SDSController {
         log.debug(params)
         render SDSService.lookupSpecies(params.scientificName, params.latitude, params.longitude, params.date) as JSON
 
+    }
+
+    /**
+     * SDS layers
+     */
+    def layers = {
+        render GeoLocationHelper.getGeospatialLayers() as JSON
     }
 }

@@ -55,6 +55,12 @@ individual record pages of the sandbox will indicate whether or not sensitivity 
                 <td>This is a static file.</td>
                 <td></td>
             </tr>
+            <tr>
+                <td><a href="${request.contextPath}/ws/layers">List of sensitive layer IDs</a></td>
+                <td>JSON list of layers that are required by the SDS</td>
+                <td></td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 %{--<ul>--}%

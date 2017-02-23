@@ -19,6 +19,7 @@ class UrlMappings {
                 file(inList:['sensitivity-zones.xml','sensitivity-categories.xml', 'sensitive-species-data.xml'])
             }
         }
+        "/ws/layers"(controller:'SDS', action:'layers')
 
         "500"(view:'/error')
 	}
