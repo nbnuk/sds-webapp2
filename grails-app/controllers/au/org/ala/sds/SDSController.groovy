@@ -14,6 +14,9 @@
  */
 package au.org.ala.sds
 
+import au.org.ala.sds.model.SensitivityCategory
+import au.org.ala.sds.model.SensitivityZone
+import au.org.ala.sds.util.Configuration
 import au.org.ala.sds.util.GeoLocationHelper
 import grails.converters.JSON
 
@@ -59,8 +62,9 @@ class SDSController {
      * WS to perform species lookup
      */
     def lookup ={
-        log.debug(params)
-        render SDSService.lookupSpecies(params.scientificName, params.latitude, params.longitude, params.date) as JSON
+        log.debug(params.toString())
+        def report = SDSService.lookupSpecies(params.scientificName, params.latitude, params.longitude, params.date)
+        render report as JSON
 
     }
 
@@ -68,6 +72,7 @@ class SDSController {
      * SDS layers
      */
     def layers = {
-        render GeoLocationHelper.getGeospatialLayers() as JSON
+        def layers = Configuration.getInstance().getGeospatialLayers()
+        render layers as JSON
     }
 }
