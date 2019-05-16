@@ -9,6 +9,9 @@ import grails.converters.JSON
 
 class BootStrap {
 
+    // JSON model for SDS sensitivity information
+    // The SensitivityCategory and SensitivityZone marshallers override the default grails approach to enums
+    // The SensitivityInstance provides a consistent output for the various instance types
     def init = { servletContext ->
         JSON.registerObjectMarshaller(SensitivityCategory, { SensitivityCategory category ->
             [value: category?.value, type: category?.type?.name()]
