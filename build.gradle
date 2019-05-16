@@ -10,8 +10,8 @@ buildscript {
     }
 }
 
-version "1.6"
-group "au.ala.org"
+version "1.6.1"
+group "au.org.ala"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
