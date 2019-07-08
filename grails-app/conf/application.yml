@@ -101,6 +101,7 @@ serverName: https://sds.ala.org.au
 security:
   cas:
     appServerName: https://sds.ala.org.au
+
     casServerName: https://auth.ala.org.au
     uriFilterPattern: /refresh
     authenticateOnlyIfLoggedInPattern: '/.*'
@@ -110,3 +111,5 @@ security:
     casServerUrlPrefix: https://auth.ala.org.au/cas
     bypass: false
 
+sdsFAQ:
+    url: https://www.ala.org.au/faq/data-sensitivity/
