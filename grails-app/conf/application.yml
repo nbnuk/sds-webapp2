@@ -110,3 +110,10 @@ security:
     casServerUrlPrefix: https://auth.ala.org.au/cas
     bypass: false
 
+sdsFAQ:
+    url: https://www.ala.org.au/faq/data-sensitivity/
+lists:
+    tool:
+        url: https://lists.ala.org.au
+sandbox:
+    url: https://sandbox.ala.org.au
