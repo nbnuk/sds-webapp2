@@ -28,12 +28,17 @@ repositories {
     maven { url "https://nexus.ala.org.au/content/groups/public/" }
 }
 
+//to avoid 'LoggerFactory is not a Logback LoggerContext but Logback is on the classpath' error
+//configurations {
+//    all*.exclude module : 'spring-boot-starter-logging'
+//}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
     compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-tomcat"
+    provided "org.springframework.boot:spring-boot-starter-tomcat" //'compile' conflicts with deployed Tomcat
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
     compile "org.grails.plugins:cache"
@@ -52,7 +57,7 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
-    compile(group: 'au.org.ala', name: 'sds', version: '1.4.5') {
+    compile(group: 'au.org.ala', name: 'sds', version: '1.4.6-NBN') { //1.4.4 has old org.apache.lucene dependencies (pre-6.6.5) that don't work with our namematching db.
         exclude group: 'org.springframework', module: 'spring-jdbc'
         exclude group: 'javax.servlet', module: 'servlet-api'
         exclude group: 'org.apache.bval', module: 'org.apache.bval.bundle'
