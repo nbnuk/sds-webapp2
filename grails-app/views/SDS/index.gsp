@@ -19,7 +19,12 @@ The Sensitive Data Service (SDS) is the mechanism for providing security over da
 <ul>
     <li>Conservation Sensitivity, whereby occurrence records for sensitive species are generalised according to country rules, e.g. by reducing their spatial precision. </li>
 </ul>
-
+For more information see <a href="${grailsApplication.config.sdsFAQ.url}">Data Sensitivity</a>.
+<h2>Testing</h2>
+<p>
+The Sensitive Data Service can be tested through the <a href="${grailsApplication.config.sandbox.url}">sandbox</a>. Simply upload your list of species and coordinates and the
+individual record pages of the sandbox will indicate whether or not sensitivity was detected.
+</p>
 <h2>Resources</h2>
 <p>The Sensitive Data Service is controlled through a set of XML files.</p>
 
@@ -73,7 +78,7 @@ The Sensitive Data Service (SDS) is the mechanism for providing security over da
     %{--<li> <a href="${request.contextPath}/sensitivity-zones.xml">sensitivity-zones.xml</a></li>--}%
 %{--</ul>--}%
 
-The species that make up the individual components of the SDS can be view via the <a href="${grailsApplication.config?.list?.tool?.url?: 'http://lists.ala.org.au/public/speciesLists?isSDS=eq:true'}">list tool</a>.
+The species that make up the individual components of the SDS can be view via the <a href="${grailsApplication.config.list.tool.url}/public/speciesLists?isSDS=eq:true">list tool</a>.
 
 </body>
 </html>
