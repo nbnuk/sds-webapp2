@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-version "1.6.1"
+version "1.6.1-NBN"
 group "au.org.ala"
 
 apply plugin:"eclipse"
@@ -20,10 +20,11 @@ apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
 
-apply from: 'https://raw.githubusercontent.com/AtlasOfLivingAustralia/travis-build-configuration/master/travis_grails_publish.gradle'
+apply from: 'https://raw.githubusercontent.com/nbnuk/travis-build-configuration/master/travis_grails_publish.gradle'
 
 repositories {
     mavenLocal()
+    maven { url "https://repository.gbif.org/repository/uk-nbn-releases/" }
     maven { url "https://repo.grails.org/grails/core" }
     maven { url "https://nexus.ala.org.au/content/groups/public/" }
 }
